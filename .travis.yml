@@ -1,0 +1,10 @@
+language: java
+
+script: mvn clean package
+
+jdk:
+  - oraclejdk9
+
+branches:
+  only:
+  - master
