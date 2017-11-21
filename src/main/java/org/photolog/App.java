@@ -1,5 +1,6 @@
 package org.photolog;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -14,6 +15,9 @@ public class App {
         Path root = Paths.get("C:\\Dev\\ToDelete");
         Files.walk(root)
                 .filter(Files::isRegularFile)
+                .map(Path::toFile)
+                .map(File::getAbsolutePath)
+                .filter(p -> p.endsWith(".java"))
                 .forEach(System.out::println);
     }
 }
