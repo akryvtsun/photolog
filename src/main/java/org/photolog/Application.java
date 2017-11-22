@@ -25,7 +25,7 @@ public class Application {
     }
 
     private boolean isJpeg(Path p) {
-        return p.getFileSystem().getPathMatcher("regex:.+(jpg|jpeg)$").matches(p);
+        return p.getFileSystem().getPathMatcher("glob:**/*.{jpg,jpeg}").matches(p);
     }
 
     public static void main(String... args) throws IOException {
