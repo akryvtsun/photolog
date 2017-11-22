@@ -1,15 +1,13 @@
 package org.photolog;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.jimfs.Configuration;
-import com.google.common.jimfs.Jimfs;
-import org.junit.Test;
+import com.google.common.collect.*;
+import com.google.common.jimfs.*;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.FileSystem;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.io.*;
+import java.nio.charset.*;
+import java.nio.file.*;
+
+import org.junit.*;
 
 public class ApplicationTest {
 
