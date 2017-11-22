@@ -1,10 +1,8 @@
 package org.photolog;
 
-import com.google.common.collect.*;
 import com.google.common.jimfs.*;
 
 import java.io.*;
-import java.nio.charset.*;
 import java.nio.file.*;
 
 import org.junit.*;
@@ -14,13 +12,22 @@ public class ApplicationTest {
     @Test
     public void successfulRun() throws IOException {
         FileSystem fs = Jimfs.newFileSystem(Configuration.unix());
-        Path foo = fs.getPath("/foo");
-        Files.createDirectory(foo);
 
-        Path hello = foo.resolve("hello.txt");
-        Files.write(hello, ImmutableList.of("hello world"), StandardCharsets.UTF_8);
+        // root
+        Path root = fs.getPath("/root");
+        Files.createDirectory(root);
+        // images
+        Path images = fs.getPath("/root/images");
+        Files.createDirectory(images);
+        Files.createFile(images.resolve("image.jpg"));
+        // docs
+        Path docs = fs.getPath("/root/docs");
+        Files.createDirectory(docs);
+        Files.createFile(docs.resolve("doc.txt"));
 
-        new Application(foo).run();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        new Application(root, new PrintStream(stream)).run();
+
+        Assert.assertTrue(stream.toByteArray().length > 0);
     }
-
 }

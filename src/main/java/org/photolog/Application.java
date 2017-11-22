@@ -1,27 +1,34 @@
 package org.photolog;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.*;
+import java.nio.file.*;
 
 public class Application {
     private final Path root;
+    private final PrintStream out;
 
-    public Application(Path root) {
+    public Application(String root) {
+        this(Paths.get(root), System.out);
+    }
+
+    Application(Path root, PrintStream out) {
         this.root = root;
+        this.out = out;
     }
 
     public void run() throws IOException {
         Files.walk(root)
                 .filter(Files::isRegularFile)
+                .filter(this::isJpeg)
                 .map(p -> p.toUri().getPath())
-                .forEach(System.out::println);
+                .forEach(out::println);
+    }
+
+    private boolean isJpeg(Path p) {
+        return p.getFileSystem().getPathMatcher("regex:.+(jpg|jpeg)$").matches(p);
     }
 
     public static void main(String... args) throws IOException {
-        new Application(
-                Paths.get(args[0])
-        ).run();
+        new Application(args[0]).run();
     }
 }
