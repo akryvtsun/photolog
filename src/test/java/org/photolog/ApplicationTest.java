@@ -19,7 +19,8 @@ public class ApplicationTest {
         // images
         Path images = fs.getPath("/root/images");
         Files.createDirectory(images);
-        Files.createFile(images.resolve("image.jpg"));
+        Files.createFile(images.resolve("image_0.jpg"));
+        Files.createFile(images.resolve("image_1.jpeg"));
         // docs
         Path docs = fs.getPath("/root/docs");
         Files.createDirectory(docs);
@@ -28,6 +29,6 @@ public class ApplicationTest {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         new Application(root, new PrintStream(stream)).run();
 
-        Assert.assertTrue(stream.toByteArray().length > 0);
+        Assert.assertEquals(2, stream.toString().split(System.lineSeparator()).length);
     }
 }
