@@ -9,7 +9,7 @@ public class Application {
     private final Consumer<Path> operation;
 
     public Application(String root) {
-        this(Paths.get(root), new PrintPathOperation());
+        this(Paths.get(root), new PathNameOperation(System.out::println));
     }
 
     Application(Path root, Consumer<Path> operation) {
