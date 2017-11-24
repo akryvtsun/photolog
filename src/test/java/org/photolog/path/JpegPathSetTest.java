@@ -6,7 +6,6 @@ import java.io.*;
 import java.nio.file.*;
 
 import org.junit.*;
-import org.photolog.path.*;
 
 public class JpegPathSetTest {
 
@@ -27,5 +26,13 @@ public class JpegPathSetTest {
         Files.createFile(root.resolve("image_1.jpeg"));
         JpegPathSet set = new JpegPathSet(root);
         Assert.assertEquals(2, set.stream().count());
+    }
+
+    @Test
+    public void invalidPathEntry() {
+        FileSystem fs = Jimfs.newFileSystem(Configuration.unix());
+        Path root = fs.getPath("/...\\///");
+        JpegPathSet set = new JpegPathSet(root);
+        Assert.assertEquals(0, set.stream().count());
     }
 }
