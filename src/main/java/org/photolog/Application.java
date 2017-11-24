@@ -17,15 +17,9 @@ public class Application {
     }
 
     public void run() throws IOException {
-        Files.walk(root)
-                .filter(Files::isRegularFile)
-                .filter(this::isJpeg)
+        new JpegFileSet(root).files()
                 .map(p -> p.toUri().getPath())
                 .forEach(out::println);
-    }
-
-    private boolean isJpeg(Path p) {
-        return p.getFileSystem().getPathMatcher("glob:**/*.{jpg,jpeg}").matches(p);
     }
 
     public static void main(String... args) throws IOException {
