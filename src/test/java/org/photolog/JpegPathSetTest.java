@@ -7,14 +7,14 @@ import java.nio.file.*;
 
 import org.junit.*;
 
-public class JpegFileSetTest {
+public class JpegPathSetTest {
 
     @Test
     public void emptyJpegFileSet() {
         FileSystem fs = Jimfs.newFileSystem(Configuration.unix());
         Path root = fs.getPath("/");
-        JpegFileSet set = new JpegFileSet(root);
-        Assert.assertEquals(0, set.files().count());
+        JpegPathSet set = new JpegPathSet(root);
+        Assert.assertEquals(0, set.stream().count());
     }
 
     @Test
@@ -24,7 +24,7 @@ public class JpegFileSetTest {
         Files.createDirectory(root);
         Files.createFile(root.resolve("image_0.jpg"));
         Files.createFile(root.resolve("image_1.jpeg"));
-        JpegFileSet set = new JpegFileSet(root);
-        Assert.assertEquals(2, set.files().count());
+        JpegPathSet set = new JpegPathSet(root);
+        Assert.assertEquals(2, set.stream().count());
     }
 }

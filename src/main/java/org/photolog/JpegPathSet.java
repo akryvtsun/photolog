@@ -4,16 +4,16 @@ import java.io.*;
 import java.nio.file.*;
 import java.util.stream.*;
 
-public final class JpegFileSet {
+public final class JpegPathSet {
     private final Path root;
     private final JpegPathMatcher matcher;
 
-    public JpegFileSet(Path root) {
+    public JpegPathSet(Path root) {
         this.root = root;
         matcher = new JpegPathMatcher(root);
     }
 
-    public Stream<Path> files() {
+    public Stream<Path> stream() {
         try {
             return Files.walk(root)
                     .filter(Files::isRegularFile)

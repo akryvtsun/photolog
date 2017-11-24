@@ -5,20 +5,20 @@ import java.nio.file.*;
 import java.util.function.*;
 
 public class Application {
-    private final JpegFileSet fileSet;
+    private final JpegPathSet pathSet;
     private final Consumer<Path> operation;
 
     public Application(String root) {
-        this(Paths.get(root), new PrintFileOperation());
+        this(Paths.get(root), new PrintPathOperation());
     }
 
     Application(Path root, Consumer<Path> operation) {
-        fileSet = new JpegFileSet(root);
+        pathSet = new JpegPathSet(root);
         this.operation = operation;
     }
 
     public void run() throws IOException {
-        fileSet.files()
+        pathSet.stream()
             .forEach(operation);
     }
 
