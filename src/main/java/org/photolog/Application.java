@@ -6,17 +6,13 @@ import java.util.function.*;
 
 import org.photolog.path.*;
 
-public class Application {
+public final class Application {
     private final JpegPathSet pathSet;
     private final Consumer<Path> operation;
 
-    public Application(String root) {
-        this(Paths.get(root), new PathNameOperation(System.out::println));
-    }
-
-    Application(Path root, Consumer<Path> operation) {
+    public Application(Path root, Consumer<String> printFunc) {
         pathSet = new JpegPathSet(root);
-        this.operation = operation;
+        operation = new PathNameOperation(printFunc);
     }
 
     public void run() throws IOException {
@@ -25,6 +21,8 @@ public class Application {
     }
 
     public static void main(String... args) throws IOException {
-        new Application(args[0]).run();
+        new Application(
+                Paths.get(args[0]), System.out::println
+        ).run();
     }
 }
