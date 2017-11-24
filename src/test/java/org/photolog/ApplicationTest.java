@@ -4,6 +4,7 @@ import com.google.common.jimfs.*;
 
 import java.io.*;
 import java.nio.file.*;
+import java.util.concurrent.atomic.*;
 
 import org.junit.*;
 
@@ -26,9 +27,9 @@ public class ApplicationTest {
         Files.createDirectory(docs);
         Files.createFile(docs.resolve("doc.txt"));
 
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        new Application(root, new PrintStream(stream)).run();
+        final AtomicLong count = new AtomicLong();
+        new Application(root, s -> count.incrementAndGet()).run();
 
-        Assert.assertEquals(2, stream.toString().split(System.lineSeparator()).length);
+        Assert.assertEquals(2, count.longValue());
     }
 }
