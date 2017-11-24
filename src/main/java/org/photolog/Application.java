@@ -4,6 +4,8 @@ import java.io.*;
 import java.nio.file.*;
 import java.util.function.*;
 
+import org.photolog.path.*;
+
 public class Application {
     private final JpegPathSet pathSet;
     private final Consumer<Path> operation;

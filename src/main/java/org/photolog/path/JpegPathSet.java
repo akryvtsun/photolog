@@ -1,4 +1,4 @@
-package org.photolog;
+package org.photolog.path;
 
 import java.io.*;
 import java.nio.file.*;

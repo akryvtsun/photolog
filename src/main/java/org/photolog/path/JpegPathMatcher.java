@@ -1,9 +1,9 @@
-package org.photolog;
+package org.photolog.path;
 
 import java.nio.file.*;
 import java.util.function.*;
 
-public final class JpegPathMatcher implements Predicate<Path> {
+final class JpegPathMatcher implements Predicate<Path> {
     private final PathMatcher matcher;
 
     public JpegPathMatcher(Path root) {

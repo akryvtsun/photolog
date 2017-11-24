@@ -1,4 +1,4 @@
-package org.photolog;
+package org.photolog.path;
 
 import com.google.common.jimfs.*;
 
@@ -6,6 +6,7 @@ import java.io.*;
 import java.nio.file.*;
 
 import org.junit.*;
+import org.photolog.path.*;
 
 public class JpegPathSetTest {
 
