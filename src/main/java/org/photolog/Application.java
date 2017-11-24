@@ -5,7 +5,7 @@ import java.nio.file.*;
 import java.util.function.*;
 
 public class Application {
-    private final Path root;
+    private final JpegFileSet fileSet;
     private final Consumer<Path> operation;
 
     public Application(String root) {
@@ -13,13 +13,13 @@ public class Application {
     }
 
     Application(Path root, Consumer<Path> operation) {
-        this.root = root;
+        fileSet = new JpegFileSet(root);
         this.operation = operation;
     }
 
     public void run() throws IOException {
-        new JpegFileSet(root).files()
-                .forEach(operation);
+        fileSet.files()
+            .forEach(operation);
     }
 
     public static void main(String... args) throws IOException {
