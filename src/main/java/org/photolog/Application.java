@@ -6,21 +6,20 @@ import java.util.function.*;
 
 public class Application {
     private final Path root;
-    private final Consumer<String> processor;
+    private final Consumer<Path> operation;
 
     public Application(String root) {
-        this(Paths.get(root), System.out::println);
+        this(Paths.get(root), new PrintFileOperation());
     }
 
-    Application(Path root, Consumer<String> processor) {
+    Application(Path root, Consumer<Path> operation) {
         this.root = root;
-        this.processor = processor;
+        this.operation = operation;
     }
 
     public void run() throws IOException {
         new JpegFileSet(root).files()
-                .map(p -> p.toUri().getPath())
-                .forEach(processor);
+                .forEach(operation);
     }
 
     public static void main(String... args) throws IOException {
