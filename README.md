@@ -6,10 +6,10 @@
 PhotoLog is an application for finding duplicate image files in file system. The main purpose is to find duplicate 
 files of photo pictures.
 
-Some additional image browsing and cataloging functions will be added in the future program versions.  
+Some additional image browsing and cataloging functions will be added in future program versions.  
  
-### Build 
+## Build 
 
-### Running
+## Running
 
-### Release
+## Release
