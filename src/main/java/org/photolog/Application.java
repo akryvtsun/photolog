@@ -10,7 +10,11 @@ public final class Application {
     private final JpegPathSet pathSet;
     private final Consumer<Path> operation;
 
-    public Application(Path root, Consumer<String> printFunc) {
+    public Application(String root) {
+        this(Paths.get(root), System.out::println);
+    }
+
+    Application(Path root, Consumer<String> printFunc) {
         pathSet = new JpegPathSet(root);
         operation = new PathNameOperation(printFunc);
     }
@@ -21,8 +25,6 @@ public final class Application {
     }
 
     public static void main(String... args) throws IOException {
-        new Application(
-                Paths.get(args[0]), System.out::println
-        ).run();
+        new Application(args[0]).run();
     }
 }
